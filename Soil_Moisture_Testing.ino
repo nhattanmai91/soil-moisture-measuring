@@ -33,7 +33,9 @@ void setup() {
 }
 
 void loop() {
-  sensorValue = analogRead(analogInPin);
-  Serial.println(sensorValue);
+  sensorValue = analogRead(analogInPin);  
+  //sensorValue = map(sensorValue, 0, 1023, 0, 100);
+  Serial.print(sensorValue);
+  Serial.print('\n');
   delay(60000);
 }
