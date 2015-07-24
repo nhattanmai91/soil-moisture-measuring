@@ -53,6 +53,10 @@ void serialEvent (Serial myPort) {
     }
 
     if (xPos-latest_value_label > OFFSET_X*10) {
+      strokeWeight(0.5);
+      stroke(#FF0040);  
+      line(xPos, height-inByte-2, xPos, height-inByte-8);
+
       text(int(inByte), xPos-5, height-inByte-10);
       text(int(minute())+"m", xPos-5, height-inByte-20);
       text(int(hour())+"h", xPos-5, height-inByte-30);
@@ -78,7 +82,7 @@ void serialEvent (Serial myPort) {
 void draw_axis(float base) {  
   int y_base = int(height - base);  //at the sensor value
 
-  textSize(TEXT_SIZE_VALUE+2);
+    textSize(TEXT_SIZE_VALUE+2);
   text("Soil Moisture Value (1 sample/minute)", 0, 20);
 
   textSize(TEXT_SIZE_VALUE);  
