@@ -1,6 +1,6 @@
 import processing.serial.*;
 
-final int WIDTH = 3000;
+final int WIDTH = 800;
 final int HEIGHT = 400;
 final int TEXT_SIZE_VALUE = 10;
 final int OFFSET_Y = 50;
@@ -10,6 +10,7 @@ Serial myPort;        // The serial port
 int xPos = 1;         // horizontal position of the graph
 int runs_flag = 0;
 int latest_value_label = 0;
+int loop_graph_num = 0;
 
 void setup () {
   // set the window size:
@@ -53,12 +54,17 @@ void serialEvent (Serial myPort) {
 
     if (xPos-latest_value_label > OFFSET_X*10) {
       text(int(inByte), xPos-5, height-inByte-10);
+      text(int(minute())+"m", xPos-5, height-inByte-20);
+      text(int(hour())+"h", xPos-5, height-inByte-30);
+      text(int(day())+"/"+int(month()), xPos-5, height-inByte-40);
       latest_value_label = xPos;
     }    
 
     // at the edge of the screen, go back to the beginning:
     if (xPos >= width) {
-      xPos = 0;
+      save("graph_" + loop_graph_num + ".jpg");
+      loop_graph_num+=1;
+      xPos = 0;      
       latest_value_label=xPos;
       runs_flag=0;
       background(0);
@@ -73,7 +79,7 @@ void draw_axis(float base) {
   int y_base = int(height - base);  //at the sensor value
 
   textSize(TEXT_SIZE_VALUE+2);
-  text("Soil Moisture Value", 0, 20);
+  text("Soil Moisture Value (1 sample/minute)", 0, 20);
 
   textSize(TEXT_SIZE_VALUE);  
   text(str(int(base)), 0, y_base); 
