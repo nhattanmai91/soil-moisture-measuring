@@ -1,6 +1,6 @@
 import processing.serial.*;
 
-final int WIDTH = 1600;
+final int WIDTH = 3000;
 final int HEIGHT = 400;
 final int TEXT_SIZE_VALUE = 10;
 final int OFFSET_Y = 50;
